@@ -10,15 +10,24 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Center(
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          const Text('Ingrese una ciudad para obtener el clima actual'),
-          TextField(
-            onSubmitted: (value) {
-              ref.read(climaActualProvider.notifier).onCiudadInput(value);
-              context.push('/resultados');
-            },
-          ),
-        ]),
+        child: SizedBox(
+          width: 400,
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            SizedBox(
+                height: 300,
+                width: 300,
+                child: Image.asset('assets/icon/weather-icon.png')),
+            const Text('Ingrese una ciudad para obtener el clima actual'),
+            TextField(
+              onSubmitted: (value) {
+                if (value.isNotEmpty) {
+                  ref.read(climaActualProvider.notifier).onCiudadInput(value);
+                  context.push('/resultados');
+                }
+              },
+            ),
+          ]),
+        ),
       ),
     );
   }

@@ -10,6 +10,7 @@ class OpenWeatherMapDatasource extends ClimaDatasource {
       baseUrl: 'http://api.openweathermap.org/data/2.5/weather',
       queryParameters: {
         'appid': Environment.openWeatherMapKey,
+        'lang': 'es',
       }));
 
   @override

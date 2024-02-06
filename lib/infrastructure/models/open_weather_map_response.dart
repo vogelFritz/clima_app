@@ -226,12 +226,12 @@ class Weather {
 class Wind {
   final double speed;
   final int deg;
-  final double gust;
+  final double? gust;
 
   Wind({
     required this.speed,
     required this.deg,
-    required this.gust,
+    this.gust,
   });
 
   factory Wind.fromRawJson(String str) => Wind.fromJson(json.decode(str));
