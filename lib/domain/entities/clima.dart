@@ -3,6 +3,7 @@ class Clima {
   final int temp;
   final int sensacionTermica;
   final int humedad;
+  final int presion;
   final int visibilidad;
   final String descripcion;
   final Viento viento;
@@ -12,6 +13,7 @@ class Clima {
     required this.temp,
     required this.sensacionTermica,
     required this.humedad,
+    required this.presion,
     required this.visibilidad,
     required this.descripcion,
     required this.viento,

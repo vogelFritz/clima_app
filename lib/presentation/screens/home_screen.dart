@@ -14,13 +14,16 @@ class HomeScreen extends ConsumerWidget {
       body: Center(
         child: SizedBox(
           width: 400,
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
+          child: Column(children: [
+            const SizedBox(height: 150),
             SizedBox(
                 height: 300,
                 width: 300,
                 child: Image.asset('assets/icon/weather-icon.png')),
-            const Text('Ingrese una ciudad para obtener el clima actual'),
+            const Text('Ingrese una ciudad para obtener el clima actual',
+                style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
             CustomTextField(
+              hintText: 'London',
               onSubmitted: (value) {
                 if (value.isNotEmpty) {
                   ref.read(climaActualProvider.notifier).onCiudadInput(value);

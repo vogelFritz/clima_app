@@ -45,49 +45,63 @@ class ResultadosView extends ConsumerWidget {
                 width: size.width * 0.9,
                 height: size.height * 0.6,
                 child: Column(children: [
-                  Container(
-                      width: 200,
-                      height: 150,
-                      margin: const EdgeInsets.only(top: 30),
-                      child: Column(
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Image.network(
+                          'https://openweathermap.org/img/wn/${clima.iconId}@2x.png'),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: Image.network(
-                                      'https://openweathermap.org/img/wn/${clima.iconId}@2x.png')),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '${clima.temp.toString()}ºC',
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  Text(
-                                    'Sensación ${clima.sensacionTermica.toString()}ºC',
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ],
-                              ),
-                            ],
+                          Text(
+                            '${clima.temp.toString()}ºC',
+                            style: const TextStyle(fontSize: 22),
+                            textAlign: TextAlign.left,
                           ),
-                          Text(clima.descripcion),
+                          Text(
+                            'Sensación ${clima.sensacionTermica.toString()}ºC',
+                            textAlign: TextAlign.left,
+                          ),
                         ],
+                      ),
+                    ],
+                  ),
+                  Text(clima.descripcion, style: const TextStyle(fontSize: 20)),
+                  const SizedBox(height: 30),
+                  const Text('Viento',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                  Text('${clima.viento.velocidad.toString()} km/h',
+                      style: const TextStyle(
+                        fontSize: 20,
                       )),
-                  Container(
-                      width: 200,
-                      height: 150,
-                      margin: const EdgeInsets.only(top: 30),
-                      child: Column(
-                        children: [
-                          const Text('Viento'),
-                          Text('${clima.viento.velocidad.toString()} km/h'),
-                          Text('Dirección ${clima.viento.direccion}'),
-                        ],
+                  Text('Dirección ${clima.viento.direccion}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                      )),
+                  const SizedBox(height: 30),
+                  const Text('Humedad',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                  Text('${clima.humedad.toString()}%',
+                      style: const TextStyle(
+                        fontSize: 20,
+                      )),
+                  const Text('Presión',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                  Text('${clima.presion.toString()} mb',
+                      style: const TextStyle(
+                        fontSize: 20,
+                      )),
+                  const Text('Visibilidad',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                  Text('${clima.visibilidad.toString()} metros',
+                      style: const TextStyle(
+                        fontSize: 20,
                       )),
                 ]),
               ),

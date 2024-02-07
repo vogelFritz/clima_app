@@ -8,6 +8,7 @@ class ClimaMapper {
         temp: (response.main.temp - 273).round(),
         sensacionTermica: (response.main.feelsLike - 273).round(),
         humedad: response.main.humidity,
+        presion: response.main.pressure,
         visibilidad: response.visibility,
         descripcion:
             _capitalizarPrimeraLetra(response.weather.first.description),
