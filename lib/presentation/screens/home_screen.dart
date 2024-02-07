@@ -26,29 +26,31 @@ class HomeScreen extends ConsumerWidget {
       body: Center(
         child: SizedBox(
           width: 400,
-          child: Column(children: [
-            const SizedBox(height: 150),
-            SizedBox(
-                height: 300,
-                width: 300,
-                child: Image.asset('assets/icon/weather-icon.png')),
-            const Text('Ingrese una ciudad para obtener el clima actual',
-                style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
-            CustomTextField(
-              textController: textController,
-              errorText: requestStatus == RequestStatus.failed
-                  ? 'No se pudo encontrar la ciudad'
-                  : null,
-              hintText: 'London',
-              onSubmitted: (value) {
-                if (value.isNotEmpty) {
-                  textController.clear();
-                  ref.read(climaActualProvider.notifier).onCiudadInput(value);
-                  context.push('/resultados');
-                }
-              },
-            ),
-          ]),
+          child: SingleChildScrollView(
+            child: Column(children: [
+              const SizedBox(height: 150),
+              SizedBox(
+                  height: 300,
+                  width: 300,
+                  child: Image.asset('assets/icon/weather-icon.png')),
+              const Text('Ingrese una ciudad para obtener el clima actual',
+                  style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+              CustomTextField(
+                textController: textController,
+                errorText: requestStatus == RequestStatus.failed
+                    ? 'No se pudo encontrar la ciudad'
+                    : null,
+                hintText: 'London',
+                onSubmitted: (value) {
+                  if (value.isNotEmpty) {
+                    textController.clear();
+                    ref.read(climaActualProvider.notifier).onCiudadInput(value);
+                    context.push('/resultados');
+                  }
+                },
+              ),
+            ]),
+          ),
         ),
       ),
     );
