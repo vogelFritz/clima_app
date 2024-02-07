@@ -26,18 +26,32 @@ class ClimaMapper {
       case 1:
         return 'NE';
       case 2:
-        return 'E';
+        return 'NE';
       case 3:
-        return 'SE';
+        return 'E';
       case 4:
-        return 'S';
+        return 'E';
       case 5:
-        return 'SO';
+        return 'SE';
       case 6:
-        return 'O';
+        return 'SE';
       case 7:
-        return 'NO';
+        return 'S';
       case 8:
+        return 'S';
+      case 9:
+        return 'SO';
+      case 10:
+        return 'SO';
+      case 11:
+        return 'O';
+      case 12:
+        return 'O';
+      case 13:
+        return 'NO';
+      case 14:
+        return 'NO';
+      case 15:
         return 'N';
       default:
         return 'XX';

@@ -11,13 +11,17 @@ class OpenWeatherMapDatasource extends ClimaDatasource {
       queryParameters: {
         'appid': Environment.openWeatherMapKey,
         'lang': 'es',
-      }));
+      },
+      validateStatus: (statuscode) => true));
 
   @override
   Future<Clima> climaActualPorCiudad(String ciudad) async {
     final response = await dio.get('/', queryParameters: {
       'q': ciudad,
     });
+    if (response.statusCode != 200) {
+      throw Exception('La búsqueda no tuvo éxito');
+    }
     final openWeatherMapResponse =
         OpenWeatherMapResponse.fromJson(response.data);
     final climaEntity =

@@ -10,7 +10,6 @@ class ResultadosScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final Clima? clima = ref.watch(climaActualProvider);
-
     return clima != null ? ResultadosView(clima: clima) : const LoadingView();
   }
 }

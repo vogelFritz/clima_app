@@ -1,4 +1,4 @@
-import 'package:clima_app/presentation/providers/clima_actual_provider.dart';
+import 'package:clima_app/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +10,8 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textController = TextEditingController();
+    final requestStatus = ref.watch(requestStatusProvider);
     return Scaffold(
       body: Center(
         child: SizedBox(
@@ -23,9 +25,14 @@ class HomeScreen extends ConsumerWidget {
             const Text('Ingrese una ciudad para obtener el clima actual',
                 style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
             CustomTextField(
+              textController: textController,
+              errorText: requestStatus == RequestStatus.failed
+                  ? 'No se pudo encontrar la ciudad'
+                  : null,
               hintText: 'London',
               onSubmitted: (value) {
                 if (value.isNotEmpty) {
+                  textController.clear();
                   ref.read(climaActualProvider.notifier).onCiudadInput(value);
                   context.push('/resultados');
                 }

@@ -1,5 +1,5 @@
 import 'package:clima_app/domain/entities/clima.dart';
-import 'package:clima_app/presentation/providers/clima_actual_provider.dart';
+import 'package:clima_app/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +12,7 @@ class ResultadosView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final requestStatus = ref.watch(requestStatusProvider);
     final textController = TextEditingController();
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -28,7 +29,12 @@ class ResultadosView extends ConsumerWidget {
               textController.clear();
               ref.read(climaActualProvider.notifier).onCiudadInput(value);
             },
-            hintText: 'Buscar otra ciudad',
+            hintText: requestStatus == RequestStatus.failed
+                ? 'No se encontró la ciudad'
+                : 'Buscar otra ciudad',
+            hintStyle: TextStyle(
+                color:
+                    requestStatus == RequestStatus.failed ? Colors.red : null),
           ),
           actions: [
             IconButton(
@@ -39,7 +45,7 @@ class ResultadosView extends ConsumerWidget {
         ),
         body: Center(
           child: SingleChildScrollView(
-            child: Column(mainAxisSize: MainAxisSize.min, children: [
+            child: Column(children: [
               Text(clima.ciudad, style: const TextStyle(fontSize: 40)),
               SizedBox(
                 width: size.width * 0.9,
@@ -73,7 +79,7 @@ class ResultadosView extends ConsumerWidget {
                   const Text('Viento',
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                  Text('${clima.viento.velocidad.toString()} km/h',
+                  Text('${clima.viento.velocidad.toString()} m/s',
                       style: const TextStyle(
                         fontSize: 20,
                       )),
