@@ -33,4 +33,8 @@ class ClimaActualNotifier extends StateNotifier<Clima?> {
           .update((_) => RequestStatus.failed);
     }
   }
+
+  void update(Clima? Function(Clima? state) callback) {
+    state = callback(state);
+  }
 }

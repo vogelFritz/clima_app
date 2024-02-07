@@ -11,8 +11,18 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textController = TextEditingController();
+    final bool isDarkMode = ref.watch(isDarkModeProvider);
     final requestStatus = ref.watch(requestStatusProvider);
     return Scaffold(
+      appBar: AppBar(automaticallyImplyLeading: false, actions: [
+        IconButton(
+            onPressed: () {
+              ref.read(isDarkModeProvider.notifier).update((state) => !state);
+            },
+            icon: isDarkMode
+                ? const Icon(Icons.sunny)
+                : const Icon(Icons.mode_night))
+      ]),
       body: Center(
         child: SizedBox(
           width: 400,

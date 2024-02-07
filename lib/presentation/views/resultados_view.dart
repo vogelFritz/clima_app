@@ -14,12 +14,16 @@ class ResultadosView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final requestStatus = ref.watch(requestStatusProvider);
+    final bool isDarkMode = ref.watch(isDarkModeProvider);
     final textController = TextEditingController();
     final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () => context.pop(),
+            onPressed: () {
+              context.pop();
+              ref.read(climaActualProvider.notifier).update((_) => null);
+            },
             icon: const Icon(Icons.home),
           ),
           centerTitle: true,
@@ -39,8 +43,12 @@ class ResultadosView extends ConsumerWidget {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.mode_night),
+              onPressed: () {
+                ref.read(isDarkModeProvider.notifier).update((state) => !state);
+              },
+              icon: isDarkMode
+                  ? const Icon(Icons.sunny)
+                  : const Icon(Icons.mode_night),
             ),
           ],
         ),
@@ -88,11 +96,12 @@ class _DatosCiudadState extends State<_DatosCiudad> {
                 children: [
                   Text(
                     '${widget.clima.temp.toString()}ºC',
-                    style: const TextStyle(fontSize: 22),
+                    style: const TextStyle(fontSize: 25),
                     textAlign: TextAlign.left,
                   ),
                   Text(
                     'Sensación ${widget.clima.sensacionTermica.toString()}ºC',
+                    style: const TextStyle(fontSize: 17),
                     textAlign: TextAlign.left,
                   ),
                 ],
