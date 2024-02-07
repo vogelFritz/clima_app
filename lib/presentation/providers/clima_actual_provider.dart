@@ -14,7 +14,12 @@ class ClimaActualNotifier extends StateNotifier<Clima?> {
 
   ClimaActualNotifier(this.climaActualPorCiudad) : super(null);
 
-  onCiudadInput(String ciudad) async {
-    state = await climaActualPorCiudad(ciudad);
+  Future<bool> onCiudadInput(String ciudad) async {
+    try {
+      state = await climaActualPorCiudad(ciudad);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

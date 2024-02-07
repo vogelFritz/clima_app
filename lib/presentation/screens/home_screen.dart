@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../widgets/widgets.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
@@ -18,7 +20,7 @@ class HomeScreen extends ConsumerWidget {
                 width: 300,
                 child: Image.asset('assets/icon/weather-icon.png')),
             const Text('Ingrese una ciudad para obtener el clima actual'),
-            TextField(
+            CustomTextField(
               onSubmitted: (value) {
                 if (value.isNotEmpty) {
                   ref.read(climaActualProvider.notifier).onCiudadInput(value);

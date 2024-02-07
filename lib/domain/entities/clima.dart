@@ -6,6 +6,7 @@ class Clima {
   final int visibilidad;
   final String descripcion;
   final Viento viento;
+  final String iconId;
   Clima({
     required this.ciudad,
     required this.temp,
@@ -14,6 +15,7 @@ class Clima {
     required this.visibilidad,
     required this.descripcion,
     required this.viento,
+    required this.iconId,
   });
 }
 

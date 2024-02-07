@@ -4,15 +4,18 @@ import 'package:clima_app/infrastructure/models/open_weather_map_response.dart';
 class ClimaMapper {
   static Clima openWeatherMapResponseToClima(OpenWeatherMapResponse response) =>
       Clima(
-          ciudad: response.name,
-          temp: (response.main.temp - 273).round(),
-          sensacionTermica: (response.main.feelsLike - 273).round(),
-          humedad: response.main.humidity,
-          visibilidad: response.visibility,
-          descripcion: response.weather.first.description,
-          viento: Viento(
-              velocidad: response.wind.speed,
-              direccion: _gradosAPuntoCardinal(response.wind.deg)));
+        ciudad: response.name,
+        temp: (response.main.temp - 273).round(),
+        sensacionTermica: (response.main.feelsLike - 273).round(),
+        humedad: response.main.humidity,
+        visibilidad: response.visibility,
+        descripcion:
+            _capitalizarPrimeraLetra(response.weather.first.description),
+        viento: Viento(
+            velocidad: response.wind.speed,
+            direccion: _gradosAPuntoCardinal(response.wind.deg)),
+        iconId: response.weather.first.icon,
+      );
 
   static String _gradosAPuntoCardinal(int deg) {
     final aux = (deg / 22.5).floor();
@@ -38,5 +41,9 @@ class ClimaMapper {
       default:
         return 'XX';
     }
+  }
+
+  static String _capitalizarPrimeraLetra(String str) {
+    return str.replaceRange(0, 1, str[0].toUpperCase());
   }
 }
