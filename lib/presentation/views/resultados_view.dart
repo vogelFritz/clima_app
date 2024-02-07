@@ -54,7 +54,9 @@ class ResultadosView extends ConsumerWidget {
         ),
         body: Center(
           child: SingleChildScrollView(
-            child: _DatosCiudad(clima: clima, size: size),
+            child: requestStatus == RequestStatus.inProgress
+                ? const CircularProgressIndicator()
+                : _DatosCiudad(clima: clima, size: size),
           ),
         ));
   }
