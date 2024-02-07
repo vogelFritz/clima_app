@@ -9,11 +9,11 @@ class ClimaMapper {
         sensacionTermica: (response.main.feelsLike - 273).round(),
         humedad: response.main.humidity,
         presion: response.main.pressure,
-        visibilidad: response.visibility,
+        visibilidad: (response.visibility / 1000).round(),
         descripcion:
             _capitalizarPrimeraLetra(response.weather.first.description),
         viento: Viento(
-            velocidad: response.wind.speed,
+            velocidad: response.wind.speed * 3.6,
             direccion: _gradosAPuntoCardinal(response.wind.deg)),
         iconId: response.weather.first.icon,
       );

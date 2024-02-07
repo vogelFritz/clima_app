@@ -3,6 +3,7 @@ import 'package:clima_app/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 import '../widgets/widgets.dart';
 
@@ -45,74 +46,100 @@ class ResultadosView extends ConsumerWidget {
         ),
         body: Center(
           child: SingleChildScrollView(
-            child: Column(children: [
-              Text(clima.ciudad, style: const TextStyle(fontSize: 40)),
-              SizedBox(
-                width: size.width * 0.9,
-                height: size.height * 0.6,
-                child: Column(children: [
-                  const SizedBox(height: 30),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Image.network(
-                          'https://openweathermap.org/img/wn/${clima.iconId}@2x.png'),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${clima.temp.toString()}ºC',
-                            style: const TextStyle(fontSize: 22),
-                            textAlign: TextAlign.left,
-                          ),
-                          Text(
-                            'Sensación ${clima.sensacionTermica.toString()}ºC',
-                            textAlign: TextAlign.left,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Text(clima.descripcion, style: const TextStyle(fontSize: 20)),
-                  const SizedBox(height: 30),
-                  const Text('Viento',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                  Text('${clima.viento.velocidad.toString()} m/s',
-                      style: const TextStyle(
-                        fontSize: 20,
-                      )),
-                  Text('Dirección ${clima.viento.direccion}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                      )),
-                  const SizedBox(height: 30),
-                  const Text('Humedad',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                  Text('${clima.humedad.toString()}%',
-                      style: const TextStyle(
-                        fontSize: 20,
-                      )),
-                  const Text('Presión',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                  Text('${clima.presion.toString()} mb',
-                      style: const TextStyle(
-                        fontSize: 20,
-                      )),
-                  const Text('Visibilidad',
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                  Text('${clima.visibilidad.toString()} metros',
-                      style: const TextStyle(
-                        fontSize: 20,
-                      )),
-                ]),
-              ),
-            ]),
+            child: _DatosCiudad(clima: clima, size: size),
           ),
         ));
   }
 }
+
+class _DatosCiudad extends StatefulWidget {
+  final Clima clima;
+  final Size size;
+
+  const _DatosCiudad({
+    required this.clima,
+    required this.size,
+  });
+
+  @override
+  State<_DatosCiudad> createState() => _DatosCiudadState();
+}
+
+class _DatosCiudadState extends State<_DatosCiudad> {
+  Unidades unidadesViento = Unidades.kmh;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Text(widget.clima.ciudad, style: const TextStyle(fontSize: 40)),
+      SizedBox(
+        width: widget.size.width * 0.9,
+        height: widget.size.height * 0.6,
+        child: Column(children: [
+          const SizedBox(height: 30),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.network(
+                  'https://openweathermap.org/img/wn/${widget.clima.iconId}@2x.png'),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${widget.clima.temp.toString()}ºC',
+                    style: const TextStyle(fontSize: 22),
+                    textAlign: TextAlign.left,
+                  ),
+                  Text(
+                    'Sensación ${widget.clima.sensacionTermica.toString()}ºC',
+                    textAlign: TextAlign.left,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Text(widget.clima.descripcion, style: const TextStyle(fontSize: 20)),
+          const SizedBox(height: 30),
+          const Text('Viento',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                  '${NumberFormat.decimalPatternDigits(locale: 'es', decimalDigits: 2).format(widget.clima.viento.velocidad).toString()} km/h',
+                  style: const TextStyle(
+                    fontSize: 20,
+                  )),
+            ],
+          ),
+          Text('Dirección ${widget.clima.viento.direccion}',
+              style: const TextStyle(
+                fontSize: 20,
+              )),
+          const SizedBox(height: 30),
+          const Text('Humedad',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          Text('${widget.clima.humedad.toString()}%',
+              style: const TextStyle(
+                fontSize: 20,
+              )),
+          const Text('Presión',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          Text('${widget.clima.presion.toString()} mb',
+              style: const TextStyle(
+                fontSize: 20,
+              )),
+          const Text('Visibilidad',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+          Text('${widget.clima.visibilidad.toString()} km',
+              style: const TextStyle(
+                fontSize: 20,
+              )),
+        ]),
+      ),
+    ]);
+  }
+}
+
+enum Unidades { ms, kmh }
