@@ -62,7 +62,7 @@ class ResultadosView extends ConsumerWidget {
   }
 }
 
-class _DatosCiudad extends StatefulWidget {
+class _DatosCiudad extends StatelessWidget {
   final Clima clima;
   final Size size;
 
@@ -72,37 +72,30 @@ class _DatosCiudad extends StatefulWidget {
   });
 
   @override
-  State<_DatosCiudad> createState() => _DatosCiudadState();
-}
-
-class _DatosCiudadState extends State<_DatosCiudad> {
-  Unidades unidadesViento = Unidades.kmh;
-
-  @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Text(widget.clima.ciudad, style: const TextStyle(fontSize: 40)),
+      Text(clima.ciudad, style: const TextStyle(fontSize: 40)),
       SizedBox(
-        width: widget.size.width * 0.9,
-        height: widget.size.height * 0.6,
+        width: size.width * 0.9,
+        height: size.height * 0.6,
         child: Column(children: [
           const SizedBox(height: 30),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.network(
-                  'https://openweathermap.org/img/wn/${widget.clima.iconId}@2x.png'),
+                  'https://openweathermap.org/img/wn/${clima.iconId}@2x.png'),
               Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${widget.clima.temp.toString()}ºC',
+                    '${clima.temp.toString()}ºC',
                     style: const TextStyle(fontSize: 25),
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    'Sensación ${widget.clima.sensacionTermica.toString()}ºC',
+                    'Sensación ${clima.sensacionTermica.toString()}ºC',
                     style: const TextStyle(fontSize: 17),
                     textAlign: TextAlign.left,
                   ),
@@ -110,7 +103,7 @@ class _DatosCiudadState extends State<_DatosCiudad> {
               ),
             ],
           ),
-          Text(widget.clima.descripcion, style: const TextStyle(fontSize: 20)),
+          Text(clima.descripcion, style: const TextStyle(fontSize: 20)),
           const SizedBox(height: 30),
           const Text('Viento',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
@@ -118,32 +111,32 @@ class _DatosCiudadState extends State<_DatosCiudad> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                  '${NumberFormat.decimalPatternDigits(locale: 'es', decimalDigits: 2).format(widget.clima.viento.velocidad).toString()} km/h',
+                  '${NumberFormat.decimalPatternDigits(locale: 'es', decimalDigits: 2).format(clima.viento.velocidad).toString()} km/h',
                   style: const TextStyle(
                     fontSize: 20,
                   )),
             ],
           ),
-          Text('Dirección ${widget.clima.viento.direccion}',
+          Text('Dirección ${clima.viento.direccion}',
               style: const TextStyle(
                 fontSize: 20,
               )),
           const SizedBox(height: 30),
           const Text('Humedad',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          Text('${widget.clima.humedad.toString()}%',
+          Text('${clima.humedad.toString()}%',
               style: const TextStyle(
                 fontSize: 20,
               )),
           const Text('Presión',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          Text('${widget.clima.presion.toString()} mb',
+          Text('${clima.presion.toString()} mb',
               style: const TextStyle(
                 fontSize: 20,
               )),
           const Text('Visibilidad',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          Text('${widget.clima.visibilidad.toString()} km',
+          Text('${clima.visibilidad.toString()} km',
               style: const TextStyle(
                 fontSize: 20,
               )),
@@ -152,5 +145,3 @@ class _DatosCiudadState extends State<_DatosCiudad> {
     ]);
   }
 }
-
-enum Unidades { ms, kmh }

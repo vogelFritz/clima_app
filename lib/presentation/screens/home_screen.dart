@@ -23,10 +23,10 @@ class HomeScreen extends ConsumerWidget {
                 ? const Icon(Icons.sunny)
                 : const Icon(Icons.mode_night))
       ]),
-      body: Center(
-        child: SizedBox(
-          width: 400,
-          child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Center(
+          child: SizedBox(
+            width: 400,
             child: Column(children: [
               const SizedBox(height: 150),
               SizedBox(
@@ -40,7 +40,7 @@ class HomeScreen extends ConsumerWidget {
                 errorText: requestStatus == RequestStatus.failed
                     ? 'No se pudo encontrar la ciudad'
                     : null,
-                hintText: 'London',
+                hintText: 'Londres',
                 onSubmitted: (value) {
                   if (value.isNotEmpty) {
                     textController.clear();
