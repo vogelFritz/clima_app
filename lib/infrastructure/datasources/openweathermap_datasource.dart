@@ -18,7 +18,8 @@ class OpenWeatherMapDatasource extends ClimaDatasource {
   @override
   Future<Clima> climaActualPorCiudad(String ciudad) async {
     final connectivity = await Connectivity().checkConnectivity();
-    if (connectivity == ConnectivityResult.none) {
+    if (connectivity == ConnectivityResult.none ||
+        connectivity == ConnectivityResult.bluetooth) {
       throw ConnectivityException();
     }
     final response = await dio.get('/', queryParameters: {
