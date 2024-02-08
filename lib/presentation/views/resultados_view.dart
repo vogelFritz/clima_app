@@ -107,16 +107,11 @@ class _DatosCiudad extends StatelessWidget {
           const SizedBox(height: 30),
           const Text('Viento',
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                  '${NumberFormat.decimalPatternDigits(locale: 'es', decimalDigits: 2).format(clima.viento.velocidad).toString()} km/h',
-                  style: const TextStyle(
-                    fontSize: 20,
-                  )),
-            ],
-          ),
+          Text(
+              '${NumberFormat.decimalPatternDigits(locale: 'es', decimalDigits: 2).format(clima.viento.velocidad).toString()} km/h',
+              style: const TextStyle(
+                fontSize: 20,
+              )),
           Text('Dirección ${clima.viento.direccion}',
               style: const TextStyle(
                 fontSize: 20,

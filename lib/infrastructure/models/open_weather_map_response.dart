@@ -46,22 +46,6 @@ class OpenWeatherMapResponse {
         name: json["name"],
         cod: json["cod"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "coord": coord.toJson(),
-        "weather": List<dynamic>.from(weather.map((x) => x.toJson())),
-        "base": base,
-        "main": main.toJson(),
-        "visibility": visibility,
-        "wind": wind.toJson(),
-        "clouds": clouds.toJson(),
-        "dt": dt,
-        "sys": sys.toJson(),
-        "timezone": timezone,
-        "id": id,
-        "name": name,
-        "cod": cod,
-      };
 }
 
 class Clouds {
@@ -74,10 +58,6 @@ class Clouds {
   factory Clouds.fromJson(Map<String, dynamic> json) => Clouds(
         all: json["all"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "all": all,
-      };
 }
 
 class Coord {
@@ -93,11 +73,6 @@ class Coord {
         lon: json["lon"]?.toDouble(),
         lat: json["lat"]?.toDouble(),
       );
-
-  Map<String, dynamic> toJson() => {
-        "lon": lon,
-        "lat": lat,
-      };
 }
 
 class Main {
@@ -125,15 +100,6 @@ class Main {
         pressure: json["pressure"],
         humidity: json["humidity"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "temp": temp,
-        "feels_like": feelsLike,
-        "temp_min": tempMin,
-        "temp_max": tempMax,
-        "pressure": pressure,
-        "humidity": humidity,
-      };
 }
 
 class Sys {
@@ -158,14 +124,6 @@ class Sys {
         sunrise: json["sunrise"],
         sunset: json["sunset"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "type": type,
-        "id": id,
-        "country": country,
-        "sunrise": sunrise,
-        "sunset": sunset,
-      };
 }
 
 class Weather {
@@ -187,13 +145,6 @@ class Weather {
         description: json["description"],
         icon: json["icon"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "main": main,
-        "description": description,
-        "icon": icon,
-      };
 }
 
 class Wind {
@@ -212,10 +163,4 @@ class Wind {
         deg: json["deg"],
         gust: json["gust"]?.toDouble(),
       );
-
-  Map<String, dynamic> toJson() => {
-        "speed": speed,
-        "deg": deg,
-        "gust": gust,
-      };
 }
