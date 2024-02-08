@@ -59,6 +59,6 @@ class ClimaMapper {
   }
 
   static String _capitalizarPrimeraLetra(String str) {
-    return str.replaceRange(0, 1, str[0].toUpperCase());
+    return str.isEmpty ? '' : str.replaceRange(0, 1, str[0].toUpperCase());
   }
 }

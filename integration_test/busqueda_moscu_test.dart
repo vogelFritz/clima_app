@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 void main() {
+  // moscú es un caso que no se encuentra escrito en español
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   setUpAll(() async {
     await dotenv.load(fileName: '.env');
