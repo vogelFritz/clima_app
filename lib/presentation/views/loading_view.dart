@@ -11,7 +11,7 @@ class LoadingView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(requestStatusProvider, (_, next) {
-      if (next == RequestStatus.failed) {
+      if (next == RequestStatus.failed || next == RequestStatus.noConnection) {
         context.pop();
       }
     });
