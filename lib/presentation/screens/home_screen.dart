@@ -25,8 +25,8 @@ class HomeScreen extends ConsumerWidget {
       ]),
       body: SingleChildScrollView(
         child: Center(
-          child: SizedBox(
-            width: 400,
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(children: [
               const SizedBox(height: 150),
               SizedBox(
