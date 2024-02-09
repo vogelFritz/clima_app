@@ -78,64 +78,66 @@ class _DatosCiudad extends StatelessWidget {
       SizedBox(
         width: size.width * 0.9,
         height: size.height * 0.6,
-        child: Column(children: [
-          const SizedBox(height: 30),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.network(
-                  'https://openweathermap.org/img/wn/${clima.iconId}@2x.png'),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${clima.temp.toString()}ºC',
-                    style: const TextStyle(fontSize: 25),
-                    textAlign: TextAlign.left,
-                  ),
-                  Text(
-                    'Sensación ${clima.sensacionTermica.toString()}ºC',
-                    style: const TextStyle(fontSize: 17),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Text(clima.descripcion, style: const TextStyle(fontSize: 20)),
-          const SizedBox(height: 30),
-          const Text('Viento',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          Text(
-              '${NumberFormat.decimalPatternDigits(locale: 'es', decimalDigits: 2).format(clima.viento.velocidad).toString()} km/h',
-              style: const TextStyle(
-                fontSize: 20,
-              )),
-          Text('Dirección ${clima.viento.direccion}',
-              style: const TextStyle(
-                fontSize: 20,
-              )),
-          const SizedBox(height: 30),
-          const Text('Humedad',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          Text('${clima.humedad.toString()}%',
-              style: const TextStyle(
-                fontSize: 20,
-              )),
-          const Text('Presión',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          Text('${clima.presion.toString()} mb',
-              style: const TextStyle(
-                fontSize: 20,
-              )),
-          const Text('Visibilidad',
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-          Text('${clima.visibilidad.toString()} km',
-              style: const TextStyle(
-                fontSize: 20,
-              )),
-        ]),
+        child: SingleChildScrollView(
+          child: Column(children: [
+            const SizedBox(height: 30),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.network(
+                    'https://openweathermap.org/img/wn/${clima.iconId}@2x.png'),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${clima.temp.toString()}ºC',
+                      style: const TextStyle(fontSize: 25),
+                      textAlign: TextAlign.left,
+                    ),
+                    Text(
+                      'Sensación ${clima.sensacionTermica.toString()}ºC',
+                      style: const TextStyle(fontSize: 17),
+                      textAlign: TextAlign.left,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Text(clima.descripcion, style: const TextStyle(fontSize: 20)),
+            const SizedBox(height: 30),
+            const Text('Viento',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            Text(
+                '${NumberFormat.decimalPatternDigits(locale: 'es', decimalDigits: 2).format(clima.viento.velocidad).toString()} km/h',
+                style: const TextStyle(
+                  fontSize: 20,
+                )),
+            Text('Dirección ${clima.viento.direccion}',
+                style: const TextStyle(
+                  fontSize: 20,
+                )),
+            const SizedBox(height: 30),
+            const Text('Humedad',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            Text('${clima.humedad.toString()}%',
+                style: const TextStyle(
+                  fontSize: 20,
+                )),
+            const Text('Presión',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            Text('${clima.presion.toString()} mb',
+                style: const TextStyle(
+                  fontSize: 20,
+                )),
+            const Text('Visibilidad',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            Text('${clima.visibilidad.toString()} km',
+                style: const TextStyle(
+                  fontSize: 20,
+                )),
+          ]),
+        ),
       ),
     ]);
   }
